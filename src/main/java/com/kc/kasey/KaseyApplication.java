@@ -5,8 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.RedirectView;
 
 @SpringBootApplication
 @EnableWebMvc
@@ -34,10 +36,13 @@ public class KaseyApplication {
 		KaseyApplication.environment = environment;
 	}
 
-	@RequestMapping(value = "/hola")
-	public static String hola()
+	@GetMapping(value = "/")
+	public static RedirectView status()
 	{
-		return "hola2";
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl("swagger-ui.html");
+
+		return redirectView;
 	}
 
 	public static ApplicationContext dameAppContext()
